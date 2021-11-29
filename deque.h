@@ -14,7 +14,7 @@
  *        deque                 : A class that represents a binary search tree
  *        deque::iterator       : An iterator through BST
  * Author
- *    <your names here>
+ *    Alexander Dohms
  ************************************************************************/
 
 #pragma once
@@ -44,9 +44,7 @@ public:
    // 
    // Construct
    //
-   deque() 
-   { 
-   }
+   deque() {data = nullptr; numElements = NULL;}
    deque(int newCapacity);
    deque(const deque <T> & rhs);
    ~deque()
@@ -232,6 +230,7 @@ deque <T> :: deque(int newCapacity)
 template <class T>
 deque <T> :: deque(const deque <T> & rhs)
 {
+   *this = rhs;
 }
 
 
