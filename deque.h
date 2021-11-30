@@ -109,13 +109,12 @@ private:
        //    ASSERT 0 <= iaFront < numCapacity 
        //    ia =(id + iaFront) MOD numCapacity
        //    ASSERT 0 <= ia < numCapacity
-       //    RETURN ia
-       int ia;
+       //    RETURN ia 
        /*assert(0 <= id < numElements);
        assert(0 <= iaFront < numCapacity);*/
-       ia = (id + iaFront % numCapacity);
+       //int ia = (id + iaFront % numCapacity);
        //assert(0 <= ia < numCapacity);
-       return ia;
+       return (id + iaFront % numCapacity);
       //return -99;
    }
    void resize(int newCapacity = 0);
