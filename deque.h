@@ -167,13 +167,12 @@ public:
    // Compare
    //
    bool operator == (const iterator& rhs) const { return this->pDeque == rhs.pDeque; }
-   bool operator != (const iterator& rhs) const { return this->pDeque != rhs.pDeque;
-   }
+   bool operator != (const iterator& rhs) const { return this->pDeque != rhs.pDeque; }
 
    // 
    // Access
    //
-   const T & operator * () const
+   const T & operator * () const // needs work
    {
       return *(pDeque->data);
    }
