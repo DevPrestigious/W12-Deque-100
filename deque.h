@@ -264,7 +264,6 @@ deque <T> & deque <T> :: operator = (const deque <T> & rhs)
         data[i] = rhs.data[i];
 
     return *this;
-    /*return *this;*/
 }
 
 
