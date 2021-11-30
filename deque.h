@@ -246,7 +246,25 @@ deque <T> :: deque(const deque <T> & rhs)
 template <class T>
 deque <T> & deque <T> :: operator = (const deque <T> & rhs)
 {
-   return *this;
+    this->numElements = 0;
+
+    if (rhs.numCapacity == 0) {
+        numCapacity = 0;
+        data = nullptr;
+        return *this;
+    }
+    data = new T[rhs.numCapacity];
+
+    if (numCapacity < rhs.numElements)
+        resize(rhs.numElements);
+
+    numElements = rhs.numElements;
+
+    for (int i = 0; i < numElements; ++i)
+        data[i] = rhs.data[i];
+
+    return *this;
+    /*return *this;*/
 }
 
 
