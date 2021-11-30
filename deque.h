@@ -71,23 +71,23 @@ public:
    }
 
    //
-   // Access
+   // Access - Shaun
    //
    T& front();
    T& back();
    const T & front() const;
    const T & back()  const;
-   const T & operator[](size_t index) const;
-   T& operator[](size_t index);
+   const T & operator[](size_t index) const; // Steve
+   T& operator[](size_t index); // Steve
 
    // 
-   // Insert
+   // Insert - Alex
    //
    void push_front(const T& t);
    void push_back(const T& t);
 
    //
-   // Remove
+   // Remove - Jon
    //
    void clear()
    { 
@@ -114,7 +114,7 @@ public:
 private:
 #endif
    
-   // fetch array index from the deque index
+   // fetch array index from the deque index - Shaun
    int iaFromID(int id) const
    {
       return -99;
@@ -345,7 +345,7 @@ void deque <T> :: push_front(const T & t)
  * Otherwise, double the size
  ***************************************************/
 template <class T>
-void deque <T> :: resize(int newCapacity) 
+void deque <T> :: resize(int newCapacity) // - Steve 
 {
 }
 
