@@ -61,14 +61,8 @@ public:
    // Iterator
    //
    class iterator;
-   iterator begin()
-   {
-      return iterator();
-   }
-   iterator end()
-   {
-      return iterator();
-   }
+   iterator begin() { return iterator(); }
+   iterator end()   { return iterator(); }
 
    //
    // Access - Shaun
@@ -78,7 +72,7 @@ public:
    const T & front() const;
    const T & back()  const;
    const T & operator[](size_t index) const; // Steve
-   T& operator[](size_t index); // Steve
+         T & operator[](size_t index); // Steve
 
    // 
    // Insert - Alex
@@ -98,14 +92,8 @@ public:
    // 
    // Status
    //
-   size_t size() const 
-   { 
-      return numElements; 
-   }
-   bool empty() const 
-   { 
-      return numElements > 0;
-   }
+   size_t size() const { return numElements; }
+   bool empty() const  { return numElements > 0; }
 
    
 #ifdef DEBUG // make this visible to the unit tests
@@ -347,6 +335,23 @@ void deque <T> :: push_front(const T & t)
 template <class T>
 void deque <T> :: resize(int newCapacity) // - Steve 
 {
+    if (newCapacity == 0){
+        numCapacity = ++newCapacity;
+        data = new T[numCapacity];
+        return;
+    }
+
+    T* newData = new T[newCapacity];
+
+    int dest = 0;
+    for (int i = iaFront; i <= numElements; i++)
+        newData[dest++] = data[i];
+
+    numCapacity = newCapacity;
+    iaFront = 0;
+
+    delete[]data;
+    data = newData;
 }
 
 } // namespace custom
