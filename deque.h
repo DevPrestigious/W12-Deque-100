@@ -129,14 +129,16 @@ public:
    //
    // Construct
    //
-   iterator()
-   {
-   }
+   iterator() : id(0), pDeque(nullptr) { }
    iterator(custom::deque<T> *pDeque, int id)
    {
+       this->id = id;
+       this->pDeque = pDeque;
    }
    iterator(const iterator& rhs)
    {
+       this->id = rhs.id;
+       this->pDeque = rhs.pDeque;
    }
 
    //
@@ -144,25 +146,28 @@ public:
    //
    iterator& operator = (const iterator& rhs)
    {
-      return *this;
+       this->id = rhs.id;
+       this->pDeque = rhs.pDeque;
+       return *this;
    }
 
    //
    // Compare
    //
-   bool operator == (const iterator& rhs) const { return true; }
-   bool operator != (const iterator& rhs) const { return true; }
+   bool operator == (const iterator& rhs) const { return this->pDeque == rhs.pDeque; }
+   bool operator != (const iterator& rhs) const { return this->pDeque != rhs.pDeque;
+   }
 
    // 
    // Access
    //
    const T & operator * () const
    {
-      return *(new T);
+      return *(pDeque->data);
    }
    T& operator * () 
    {
-      return *(new T);
+      return *(pDeque->data);
    }
 
    // 
@@ -170,27 +175,36 @@ public:
    //
    int operator - (iterator it) const
    {
-      return 99;
+      return id - it.id;
+      //return *this;
    }
    iterator& operator += (int offset)
    {
-      return *this;
+       this->id += offset;
+       return *this;
    }
    iterator& operator ++ ()
    {
-      return *this;
+       this->id++;
+       return *this;
    }
    iterator operator ++ (int postfix)
    {
-      return *this;
+       iterator i = this;
+       this->id++;
+       return i;
+      /*return *this;*/
    }
    iterator& operator -- ()
    {
-      return *this;
+       this->id--;
+       return *this;
    }
    iterator  operator -- (int postfix)
    {
-      return *this;
+       iterator i = this;
+       this->id--;
+       return i;
    }
 
 #ifdef DEBUG // make this visible to the unit tests
@@ -304,12 +318,14 @@ T& deque <T> ::back()
 template <class T>
 const T& deque <T> ::operator[](size_t index) const
 {
-   return *(new T);
+    return data[index];
+   //return *(new T);
 }
 template <class T>
 T& deque <T> ::operator[](size_t index)
 {
-   return *(new T);
+    return data[index];
+   //return *(new T);
 }
 
 /*****************************************************
