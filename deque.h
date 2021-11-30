@@ -285,17 +285,21 @@ deque <T> & deque <T> :: operator = (const deque <T> & rhs)
 template <class T>
 const T & deque <T> :: front() const 
 {
-    //assert numElements != 0;
-    //assert nullptr != data.iaFront;
+    assert(numElements != 0);
+    //assert(nullptr != data.iaFront); //this will prbably work after the operator is done
 
-    return *data.iaFront;
+    return data[iaFront];
 
    //return *(new T);
 }
 template <class T>
 T& deque <T> ::front()
 {
-   return *(new T);
+    assert(numElements != 0);
+    //assert(nullptr != data[iaFront]); //this will prbably work after the operator is done
+
+    return data[iaFront];
+    //return *(new T);
 }
 
 /**************************************************
@@ -305,6 +309,10 @@ T& deque <T> ::front()
 template <class T>
 const T & deque <T> :: back() const 
 {
+    assert(numElements != 0);
+    //assert(nullptr != iaFront(numElements - 1)); //this will prbably work after the operator is done
+    //iaFront = iaFront(numElements - 1);
+    //return data[iaFront];
    return *(new T);
 }
 template <class T>
