@@ -223,6 +223,7 @@ private:
 template <class T>
 deque <T> :: deque(int newCapacity)
 {
+    // Looks right, but doesn't contribute yet
     numCapacity = newCapacity;
     numElements = 0;
     iaFront = 0;
