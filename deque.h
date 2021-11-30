@@ -100,11 +100,11 @@ public:
    //
    size_t size() const 
    { 
-      return 99; 
+      return numElements; 
    }
    bool empty() const 
    { 
-      return false; 
+      return numElements > 0;
    }
 
    
