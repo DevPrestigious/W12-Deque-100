@@ -44,7 +44,8 @@ public:
    // 
    // Construct
    //
-   deque() {data = nullptr; numElements = NULL;}
+
+   deque() : numCapacity(0), numElements(0), iaFront(0) { data = nullptr; }
    deque(int newCapacity);
    deque(const deque <T> & rhs);
    ~deque()
@@ -222,6 +223,14 @@ private:
 template <class T>
 deque <T> :: deque(int newCapacity)
 {
+    numCapacity = newCapacity;
+    numElements = 0;
+    iaFront = 0;
+
+    if(newCapacity > 0)
+        data = new T[newCapacity];
+    else
+        data = nullptr;
 }
 
 /****************************************************
@@ -230,7 +239,15 @@ deque <T> :: deque(int newCapacity)
 template <class T>
 deque <T> :: deque(const deque <T> & rhs)
 {
-   *this = rhs;
+    numCapacity = rhs.numCapacity;
+    numElements = rhs.numElements;
+    iaFront = rhs.iaFront;
+    data = new T[numCapacity];
+    if (numElements > 0)
+        for (int i = 0; i < numElements; i++)
+            data[i] = rhs.data[i];
+   
+   //*this = rhs;
 }
 
 
