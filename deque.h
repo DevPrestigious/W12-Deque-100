@@ -71,8 +71,10 @@ public:
    T& back();
    const T & front() const;
    const T & back()  const;
-   const T & operator[](size_t index) const; // Steve
-         T & operator[](size_t index); // Steve
+
+   // Steve - Done
+   const T & operator[](size_t index) const;
+         T & operator[](size_t index);
 
    // 
    // Insert - Alex
