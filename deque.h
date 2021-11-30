@@ -106,16 +106,16 @@ private:
    int iaFromID(int id) const
    {
        //ASSERT 0 <= id < numElements
-       //    ASSERT 0 <= iaFront < numCapacity ia =(id + iaFront) MOD numCapacity
+       //    ASSERT 0 <= iaFront < numCapacity 
+       //    ia =(id + iaFront) MOD numCapacity
        //    ASSERT 0 <= ia < numCapacity
        //    RETURN ia
        int ia;
-       assert(0 <= id < numElements);
-       assert(0 <= iaFront < numCapacity);
+       /*assert(0 <= id < numElements);
+       assert(0 <= iaFront < numCapacity);*/
        ia = (id + iaFront % numCapacity);
-       assert(0 <= ia < numCapacity);
+       //assert(0 <= ia < numCapacity);
        return ia;
-
       //return -99;
    }
    void resize(int newCapacity = 0);
