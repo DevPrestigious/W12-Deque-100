@@ -48,7 +48,11 @@ public:
    deque() : numCapacity(0), numElements(0), iaFront(0) { data = nullptr; }
    deque(int newCapacity);
    deque(const deque <T> & rhs);
-   ~deque() { clear(); }
+   ~deque() { 
+       if (numCapacity)
+           delete[] data;
+       clear(); 
+   }
 
    //
    // Assign
