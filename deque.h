@@ -93,7 +93,7 @@ public:
    // Status
    //
    size_t size() const { return numElements; }
-   bool empty() const  { return numElements > 0; }
+   bool empty() const  { return numElements == 0; }
 
    
 #ifdef DEBUG // make this visible to the unit tests
@@ -145,10 +145,7 @@ public:
        this->id = id;
        this->pDeque = pDeque;
    }
-   iterator(const iterator& rhs)
-   {
-       *this = rhs;
-   }
+   iterator(const iterator& rhs) { *this = rhs; }
 
    //
    // Assign
@@ -249,15 +246,7 @@ deque <T> :: deque(int newCapacity)
  ***************************************************/
 template <class T>
 deque <T> :: deque(const deque <T> & rhs)
-{
-    /*numCapacity = rhs.numCapacity;
-    numElements = rhs.numElements;
-    iaFront = rhs.iaFront;
-    data = new T[numCapacity];
-    if (numElements > 0)
-        for (int i = 0; i < numElements; i++)
-            data[i] = rhs.data[i];*/
-   
+{  
    *this = rhs;
 }
 
