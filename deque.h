@@ -48,9 +48,7 @@ public:
    deque() : numCapacity(0), numElements(0), iaFront(0) { data = nullptr; }
    deque(int newCapacity);
    deque(const deque <T> & rhs);
-   ~deque()
-   { 
-   }
+   ~deque() { clear(); }
 
    //
    // Assign
@@ -61,8 +59,8 @@ public:
    // Iterator
    //
    class iterator;
-   iterator begin() { return iterator(); }
-   iterator end()   { return iterator(); }
+   iterator begin() { return iterator(this, 0); }
+   iterator end()   { return iterator(this, numElements); }
 
    //
    // Access - Shaun
@@ -149,8 +147,7 @@ public:
    }
    iterator(const iterator& rhs)
    {
-       this->id = rhs.id;
-       this->pDeque = rhs.pDeque;
+       *this = rhs;
    }
 
    //
@@ -172,11 +169,11 @@ public:
    // 
    // Access
    //
-   const T & operator * () const // needs work
+   const T & operator * () const 
    {
-      return *(pDeque->data);
+      return pDeque[id];
    }
-   T& operator * () 
+   T & operator * () // needs work
    {
       return *(pDeque->data);
    }
@@ -253,15 +250,15 @@ deque <T> :: deque(int newCapacity)
 template <class T>
 deque <T> :: deque(const deque <T> & rhs)
 {
-    numCapacity = rhs.numCapacity;
+    /*numCapacity = rhs.numCapacity;
     numElements = rhs.numElements;
     iaFront = rhs.iaFront;
     data = new T[numCapacity];
     if (numElements > 0)
         for (int i = 0; i < numElements; i++)
-            data[i] = rhs.data[i];
+            data[i] = rhs.data[i];*/
    
-   //*this = rhs;
+   *this = rhs;
 }
 
 
