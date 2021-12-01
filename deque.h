@@ -55,12 +55,12 @@ public:
    }
 
    //
-   // Assign
+   // Assign | Steve - Done
    //
    deque<T> & operator = (const deque <T> & rhs);
 
    //
-   // Iterator
+   // Iterator | Steve - still needs work
    //
    class iterator;
    iterator begin() { return iterator(this, 0); }
