@@ -390,6 +390,14 @@ void deque <T> :: push_front(const T & t)
 template <class T>
 void deque <T> :: resize(int newCapacity) // - Steve 
 {
+    /*pseudocode doesn't work
+    if (newCapacity > size()) {
+        while (newCapacity < size())
+            push_back(0);
+    } else if (newCapacity < size()) {
+        while (newCapacity > size())
+            pop_back();
+    }*/
     if (newCapacity == 0){
         numCapacity = ++newCapacity;
         data = new T[numCapacity];
