@@ -319,6 +319,7 @@ const T & deque <T> :: back() const
     return data[iaFromID(numElements - 1)];
    //return *(new T);
 }
+//Test
 template <class T>
 T& deque <T> ::back()
 {
