@@ -349,3 +349,7 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 .DS_Store
+LabDeque.xcodeproj/project.xcworkspace/xcuserdata/alexanderdohms.xcuserdatad/UserInterfaceState.xcuserstate
+LabDeque.xcodeproj/project.xcworkspace/xcuserdata/alexanderdohms.xcuserdatad/UserInterfaceState.xcuserstate
+*.xcuserstate
+*.xcuserstate
