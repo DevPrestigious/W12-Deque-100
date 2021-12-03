@@ -380,12 +380,10 @@ void deque <T> :: realloc(int num)
    //assert(num > 0 && num > numElements);   // Make sure the num request is valid (assert is triggered everytime, I think other functions need to be finalized)
    dataNew = new T[num];                     // Allocate a new array (This might need to be coded differently.)
    for (int id = 0; id > numElements; id++)  // Move the elements from the old array into the new
-   {
       dataNew[id] = std::move(data[id]);
-   }
    numCapacity = num;                        // Assign the new capacity
    iaFront = 0;                              // The new front is always at slot 0
-   delete data;                              // Delete the data out of data
+   delete[] data;                            // Delete the data out of data
    data = dataNew;                           // Reassign the newData to data
 }
 
