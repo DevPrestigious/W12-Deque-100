@@ -89,8 +89,12 @@ public:
    //
    // Remove - Jon
    //
-   void clear()
+   void clear() 
    { 
+       data = nullptr;
+       numElements = 0;
+       numCapacity = 0;
+       iaFront = 0;
    }
    void pop_front();
    void pop_back();
@@ -116,12 +120,13 @@ private:
        //    ia =(id + iaFront) MOD numCapacity
        //    ASSERT 0 <= ia < numCapacity
        //    RETURN ia 
-       /*assert(0 <= id < numElements);
-       assert(0 <= iaFront < numCapacity);*/
-       //int ia = (id + iaFront % numCapacity);
+       //assert(0 <= id < numElements);
+       /*assert(0 <= iaFront < numCapacity);
+       int ia = (id + iaFront) % numCapacity;*/
        //assert(0 <= ia < numCapacity);
-       return (id + iaFront % numCapacity);
-      //return -99;
+        if(id)
+            return (id + iaFront) % numCapacity;
+        return 0;
    }
    void resize(int newCapacity = 0);
 
@@ -176,7 +181,7 @@ public:
    {
       return pDeque[id];
    }
-   T & operator * () // needs work
+   T & operator * () // Don't think this is quite right
    {
       return *(pDeque->data);
    }
@@ -270,6 +275,7 @@ deque <T> & deque <T> :: operator = (const deque <T> & rhs)
         data = nullptr;
         return *this;
     }
+    iaFront = rhs.iaFront;
     data = new T[rhs.numCapacity];
 
     if (numCapacity < rhs.numElements)
