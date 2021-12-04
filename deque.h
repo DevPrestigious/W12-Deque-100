@@ -45,7 +45,7 @@ public:
    // Construct
    //
 
-   deque() : numCapacity(0), numElements(0), iaFront(0) { data = nullptr; }
+   deque() : numElements(0), iaFront(0) { data = nullptr; }
    deque(int newCapacity);
    deque(const deque <T> & rhs);
    ~deque() { 
@@ -122,7 +122,7 @@ private:
        if (temp < 0)
            while (temp < 0)
                temp += numCapacity;
-       if (id)
+       if (numCapacity)
            return temp % numCapacity;
        return 0; 
    }
@@ -290,18 +290,14 @@ const T & deque <T> :: front() const
     //assert(numElements != 0);
     //assert(nullptr != data.iaFront); //this will prbably work after the operator is done
 
-    return data[iaFront];
+    return data[iaFromID(iaFront)];
 
    //return *(new T);
 }
 template <class T>
 T& deque <T> ::front()
 {
-    //assert(numElements != 0);
-    //assert(nullptr != data[iaFront]); //this will prbably work after the operator is done
-
-    return data[iaFront];
-    //return *(new T);
+    return data[iaFromID(iaFront)]; 
 }
 
 /**************************************************
@@ -311,18 +307,13 @@ T& deque <T> ::front()
 template <class T>
 const T & deque <T> :: back() const 
 {
-    assert(numElements != 0);
-    //assert(nullptr != iaFront(numElements - 1)); //this will prbably work after the operator is done
-    //iaFront = iaFront(numElements - 1);
     return data[iaFromID(numElements - 1)];
-   //return *(new T);
 }
 
 template <class T>
 T& deque <T> ::back()
 {
     return data[iaFromID(numElements-1)];
-   //return *(new T);
 }
 
 /**************************************************
@@ -332,13 +323,13 @@ T& deque <T> ::back()
 template <class T>
 const T& deque <T> ::operator[](size_t index) const
 {
-    return data[index];
+    return data[iaFromID(index)];
    //return *(new T);
 }
 template <class T>
 T& deque <T> ::operator[](size_t index)
 {
-    return data[index];
+    return data[iaFromID(index)];
    //return *(new T);
 }
 
@@ -366,12 +357,10 @@ void deque <T> :: push_back(const T & t)
 {
    if (numElements == numCapacity)
    {
-      if (numCapacity == 0)         // Give the deque a place to live
-      {
+      if (numCapacity == 0)         // Give the deque a place to live 
          resize(1);
-      }        // Grow the array as needed
       else
-      resize(numCapacity * 2);      // Give the deque more double space if it's out of space.
+         resize(numCapacity * 2);      // Give the deque more double space if it's out of space.
    }
    data[iaFromID(numElements++)] = t;      // Place the new element on the end
 }
@@ -405,25 +394,24 @@ void deque <T> :: push_front(const T & t)
 template <class T>
 void deque <T> :: resize(int newCapacity) // - Steve 
 {
-    /*pseudocode doesn't work
-    if (newCapacity > size()) {
+
+    /*if (newCapacity > size()) {
         while (newCapacity < size())
             push_back(0);
     } else if (newCapacity < size()) {
         while (newCapacity > size())
             pop_back();
     }*/
-    if (newCapacity == 0){
-        numCapacity = ++newCapacity;
-        data = new T[numCapacity];
-        return;
-    }
+    //if (newCapacity == 0){
+    //    numCapacity = ++newCapacity;
+    //    data = new T[numCapacity];
+    //    return;
+    //}
 
     T* newData = new T[newCapacity];
 
-    int dest = 0;
-    for (int i = iaFront; i <= numElements; i++)
-        newData[dest++] = data[i];
+    for (int i = 0; i < numElements ; i++)
+        newData[i] = data[i];
 
     numCapacity = newCapacity;
     iaFront = 0;
