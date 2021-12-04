@@ -179,11 +179,11 @@ public:
    //
    const T & operator * () const 
    {
-      return pDeque[id];
+      return pDeque->data[id];
    }
    T & operator * () // Don't think this is quite right
    {
-      return *(pDeque->data);
+      return pDeque->data[id];
    }
 
    // 
