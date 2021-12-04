@@ -14,7 +14,7 @@
  *        deque                 : A class that represents a binary search tree
  *        deque::iterator       : An iterator through BST
  * Author
- *    Alexander Dohms, Stephen Costigan, Shaun Crook
+ *    Alexander Dohms, Stephen Costigan, Shaun Crook, Jonathan Colwell
  ************************************************************************/
 
 #pragma once
