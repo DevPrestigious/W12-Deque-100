@@ -91,10 +91,11 @@ public:
    //
    void clear() 
    { 
-       data = nullptr;
+       if (numCapacity == 0)
+           return;
+       for (int id = 0; id < numElements - 1; id++)
+           data[iaFromId(id)] = NULL;
        numElements = 0;
-       numCapacity = 0;
-       iaFront = 0;
    }
    void pop_front();
    void pop_back();
@@ -115,18 +116,12 @@ private:
    // fetch array index from the deque index - Shaun
    int iaFromID(int id) const
    {
-       //ASSERT 0 <= id < numElements
-       //    ASSERT 0 <= iaFront < numCapacity 
-       //    ia =(id + iaFront) MOD numCapacity
-       //    ASSERT 0 <= ia < numCapacity
-       //    RETURN ia 
-       //assert(0 <= id < numElements);
-       /*assert(0 <= iaFront < numCapacity);
-       int ia = (id + iaFront) % numCapacity;*/
-       //assert(0 <= ia < numCapacity);
-        if(id)
-            return (id + iaFront) % numCapacity;
-        return 0;
+       int temp = iaFront + id;
+       if (temp < 0)
+           while (temp < 0)
+               temp += numCapacity;
+       int iaReturn = temp % numCapacity;
+       return iaReturn;
    }
    void resize(int newCapacity = 0);
 
@@ -179,11 +174,11 @@ public:
    //
    const T & operator * () const 
    {
-      return pDeque[id];
+      return (pDeque->data[id]);
    }
    T & operator * () // Don't think this is quite right
    {
-      return *(pDeque->data);
+       return (pDeque->data[id]);
    }
 
    // 
