@@ -118,18 +118,6 @@ private:
    // fetch array index from the deque index - Shaun
    int iaFromID(int id) const
    {
-       //ASSERT 0 <= id < numElements
-       //    ASSERT 0 <= iaFront < numCapacity 
-       //    ia =(id + iaFront) MOD numCapacity
-       //    ASSERT 0 <= ia < numCapacity
-       //    RETURN ia 
-       //assert(0 <= id < numElements);
-       /*assert(0 <= iaFront < numCapacity);
-       int ia = (id + iaFront) % numCapacity;*/
-       //assert(0 <= ia < numCapacity);
-        /*if(id)
-            return (id + iaFront) % numCapacity;
-        return 0;*/
        int temp = iaFront + id;
        if (temp < 0)
            while (temp < 0)
@@ -137,8 +125,6 @@ private:
        if (id)
            return temp % numCapacity;
        return 0;
-       /*int iaReturn = temp % numCapacity;
-       return iaReturn;*/
    }
    void resize(int newCapacity = 0);
 
