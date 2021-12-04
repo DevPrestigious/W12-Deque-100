@@ -91,10 +91,13 @@ public:
    //
    void clear() 
    { 
-       data = nullptr;
-       numElements = 0;
-       numCapacity = 0;
-       iaFront = 0;
+       if (numCapacity == 0)
+           return;
+       if (numElements) 
+           for (int id = 0; id < numElements - 1; id++)
+               data[iaFromID(id)] = NULL;
+       
+       numElements = 0; 
    }
    void pop_front();
    void pop_back();
@@ -124,9 +127,18 @@ private:
        /*assert(0 <= iaFront < numCapacity);
        int ia = (id + iaFront) % numCapacity;*/
        //assert(0 <= ia < numCapacity);
-        if(id)
+        /*if(id)
             return (id + iaFront) % numCapacity;
-        return 0;
+        return 0;*/
+       int temp = iaFront + id;
+       if (temp < 0)
+           while (temp < 0)
+               temp += numCapacity;
+       if (id)
+           return temp % numCapacity;
+       return 0;
+       /*int iaReturn = temp % numCapacity;
+       return iaReturn;*/
    }
    void resize(int newCapacity = 0);
 
@@ -268,23 +280,17 @@ deque <T> :: deque(const deque <T> & rhs)
 template <class T>
 deque <T> & deque <T> :: operator = (const deque <T> & rhs)
 {
-    this->numElements = 0;
-
-    if (rhs.numCapacity == 0) {
-        numCapacity = 0;
-        data = nullptr;
-        return *this;
-    }
-    iaFront = rhs.iaFront;
+    //clear();
+    iaFront = 0;
     data = new T[rhs.numCapacity];
 
-    if (numCapacity < rhs.numElements)
+    if (numElements < rhs.numElements)
         resize(rhs.numElements);
 
     numElements = rhs.numElements;
 
     for (int i = 0; i < numElements; ++i)
-        data[i] = rhs.data[i];
+        data[i] = rhs.data[rhs.iaFromID(i)];
 
     return *this;
 }
