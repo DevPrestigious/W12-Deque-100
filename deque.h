@@ -124,7 +124,7 @@ private:
                temp += numCapacity;
        if (id)
            return temp % numCapacity;
-       return 0;
+       return 0; 
    }
    void resize(int newCapacity = 0);
 
@@ -190,7 +190,6 @@ public:
    int operator - (iterator it) const
    {
       return id - it.id;
-      //return *this;
    }
    iterator& operator += (int offset)
    {
@@ -207,7 +206,6 @@ public:
        iterator i = this;
        this->id++;
        return i;
-      /*return *this;*/
    }
    iterator& operator -- ()
    {
