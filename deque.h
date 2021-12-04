@@ -324,13 +324,11 @@ template <class T>
 const T& deque <T> ::operator[](size_t index) const
 {
     return data[iaFromID(index)];
-   //return *(new T);
 }
 template <class T>
 T& deque <T> ::operator[](size_t index)
 {
     return data[iaFromID(index)];
-   //return *(new T);
 }
 
 /*****************************************************
@@ -339,6 +337,8 @@ T& deque <T> ::operator[](size_t index)
 template <class T>
 void deque <T> :: pop_back()
 {
+    numElements--;
+    data[iaFromID(numElements)] = NULL;
 }
 
 /*****************************************************
@@ -347,6 +347,11 @@ void deque <T> :: pop_back()
 template <class T>
 void deque <T> :: pop_front()
 {
+    numElements--; 
+    data[iaFromID(0)] = NULL;
+    iaFront++;
+    if (iaFront == numCapacity)
+        iaFront = 0;
 }
 
 /******************************************************
