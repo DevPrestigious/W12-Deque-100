@@ -358,55 +358,45 @@ void deque <T> :: pop_front()
 {
 }
 
-/**************************************************
- * DEQUE :: Realloc
- * Reallocates a new array.
- * This function is required for our push back and push front
- *************************************************/
-template <class T>
-void deque <T> :: realloc(int num)
-{
-   T * dataNew;                              // Create a new location to put data.
-   //assert(num > 0 && num > numElements);   // Make sure the num request is valid (assert is triggered everytime, I think other functions need to be finalized)
-   dataNew = new T[num];                     // Allocate a new array (This might need to be coded differently.)
-   for (int id = 0; id > numElements; id++)  // Move the elements from the old array into the new
-      dataNew[id] = std::move(data[id]);
-   numCapacity = num;                        // Assign the new capacity
-   iaFront = 0;                              // The new front is always at slot 0
-   delete[] data;                            // Delete the data out of data
-   data = dataNew;                           // Reassign the newData to data
-}
-
 /******************************************************
  * DEQUE : PUSH_BACK
  ******************************************************/
 template <class T>
-void deque <T> :: push_back(const T & t) 
+void deque <T> :: push_back(const T & t)
 {
-   if (numElements == numCapacity) {
-      realloc(this->numCapacity * 2);        // Grow the array as needed
+   if (numElements == numCapacity)
+   {
+      if (numCapacity == 0)         // Give the deque a place to live
+      {
+         resize(1);
+      }        // Grow the array as needed
+      else
+      resize(numCapacity * 2);      // Give the deque more double space if it's out of space.
    }
-   this->data[iaFromID(numElements++)];      // Place the new element on the end
+   data[iaFromID(numElements++)] = t;      // Place the new element on the end
 }
 
 /******************************************************
  * DEQUE : PUSH_FRONT
  ******************************************************/
 template <class T>
-void deque <T> :: push_front(const T & t) 
+void deque <T> :: push_front(const T & t)
 {
    if (numElements == numCapacity) {
-      realloc(this->numCapacity * 2);        // Grow the array as needed
+      if (numCapacity == 0) {      // Give the deque a place to live
+         resize(1);
+      }
+      else
+         resize(numCapacity * 2);   // Give the deque more double space if it's out of space.
    }
-   iaFront--;                                // The new front is adjusted to the left.
-                                             // Note that it may go negative so adjust for that
-   if (iaFront < 0) {
-      iaFront = this->numCapacity - 1;
+   int temp = iaFront--;         // iaFront at before 0
+   if (temp < 0 ) {
+      temp = numCapacity - 1;
    }
-   this->data[iaFront] = t;                  // Add the new value
-   numElements++;                            // Increment the number of elements
-}
+   data[iaFromID(temp)] = t;
+   numElements++;                   // Increment the number of elements
 
+}
 /****************************************************
  * DEQUE :: GROW
  * If the deque is currently empty, allocate to size 2.
