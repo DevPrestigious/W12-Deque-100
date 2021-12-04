@@ -186,7 +186,7 @@ public:
 
    // 
    // Arithmetic
-   //
+   // 
    int operator - (iterator it) const
    {
       return id - it.id;
@@ -264,7 +264,6 @@ deque <T> :: deque(const deque <T> & rhs)
 template <class T>
 deque <T> & deque <T> :: operator = (const deque <T> & rhs)
 {
-    //clear();
     iaFront = 0;
     data = new T[rhs.numCapacity];
 
@@ -287,12 +286,7 @@ deque <T> & deque <T> :: operator = (const deque <T> & rhs)
 template <class T>
 const T & deque <T> :: front() const 
 {
-    //assert(numElements != 0);
-    //assert(nullptr != data.iaFront); //this will prbably work after the operator is done
-
     return data[iaFromID(iaFront)];
-
-   //return *(new T);
 }
 template <class T>
 T& deque <T> ::front()
@@ -399,20 +393,6 @@ void deque <T> :: push_front(const T & t)
 template <class T>
 void deque <T> :: resize(int newCapacity) // - Steve 
 {
-
-    /*if (newCapacity > size()) {
-        while (newCapacity < size())
-            push_back(0);
-    } else if (newCapacity < size()) {
-        while (newCapacity > size())
-            pop_back();
-    }*/
-    //if (newCapacity == 0){
-    //    numCapacity = ++newCapacity;
-    //    data = new T[numCapacity];
-    //    return;
-    //}
-
     T* newData = new T[newCapacity];
 
     for (int i = 0; i < numElements ; i++)
